@@ -10,7 +10,9 @@
 </head>
 <body>
 	<div>
-		<input class="btn btn-default btn-add" type="button" value="添加">
+		<input class="btn btn-primary btn-add" type="button" value="添加">
+		
+		<input type="text" id="txt-key"/><input class="btn btn-primary btn-search" type="button" value="搜索">
 	</div>
 	<table class="table">
 		<tr>
@@ -30,6 +32,11 @@
 	<jsp:include page="../shared/_footer.jsp"></jsp:include>
 	<script>
 		$(function() {
+			$(".btn-search").click(function(){
+				var key=$("#txt-key").val();
+				location.href="${pageContext.request.contextPath}/user/list?name="+key;
+			});
+			
 			$(".btn-add").click(function() {
 				layer.open({
 					type : 2,
@@ -39,7 +46,7 @@
 					area : [ '380px', '350px' ],
 					content : '${pageContext.request.contextPath}/user/add' //iframe的url
 				});
-			})
+			});
 
 			$(".btn-del").click(function() {
 				var obj = $(this);
@@ -66,7 +73,7 @@
 					})
 
 				});
-			})
+			});
 		})
 	</script>
 </body>

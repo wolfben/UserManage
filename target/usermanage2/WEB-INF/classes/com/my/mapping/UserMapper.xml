@@ -12,11 +12,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		id=#{id}
 	</select>
 
-	<select id="getList" resultMap="BaseResultMap">
-		select * from users
+	<select id="getList" resultMap="BaseResultMap" parameterType="Map">
+		select * from users 
+		<where>
+		<if test="name != null and name !=''">
+		and name like #{name}
+		</if>
+		</where>
+		order by id desc
 	</select>
 	
 	<insert id="insert" parameterType="com.my.model.User">
 		insert into users(name) values(#{name})
 	</insert>
+	
+	 <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users where id = #{id}
+  </delete>
 </mapper>  

@@ -6,6 +6,7 @@ import com.my.model.User;
 import com.my.service.IUserService;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -23,8 +24,8 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<User> getList() {
-		return userDao.getList();
+	public List<User> getList(Map<String,Object>map) {
+		return userDao.getList(map);
 	}
 
 	@Override

@@ -12,8 +12,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		id=#{id}
 	</select>
 
-	<select id="getList" resultMap="BaseResultMap">
-		select * from users order by id desc
+	<select id="getList" resultMap="BaseResultMap" parameterType="Map">
+		select * from users 
+		<where>
+		<if test="name != null and name !=''">
+		and name like #{name}
+		</if>
+		</where>
+		order by id desc
 	</select>
 	
 	<insert id="insert" parameterType="com.my.model.User">

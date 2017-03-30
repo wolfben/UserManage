@@ -26,6 +26,7 @@ $(function(){
 			console.log(data);
 			if(data.code==1){
 				layer.msg("添加成功");
+	
 			}else{
 				layer.msg(data.msg);
 			}
