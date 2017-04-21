@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.my.model.Page;
 import com.my.model.User;
 import com.my.service.IUserService;
 
@@ -28,8 +31,9 @@ public class UserController {
 	IUserService userService;
 
 	@RequestMapping(value = "/list")
-
-	public String list(@RequestParam(value = "name", required = false) String name, ModelMap model) {
+	public String list(@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			ModelMap model) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -37,10 +41,14 @@ public class UserController {
 			map.put("name", "%" + name + "%");
 		}
 
+		PageHelper.startPage(page, 10);
 		List list = userService.getList(map);
+		
+		PageInfo pageInfo = new PageInfo(list);
 
 		model.addAttribute("list", list);
-		
+		model.addAttribute("pageInfo",pageInfo);
+
 		log.info("/user/list");
 
 		return "/user/list";
