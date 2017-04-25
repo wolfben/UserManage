@@ -25,7 +25,9 @@ $(function(){
 		$.post("${pageContext.request.contextPath}/user/insert",{name:username},function(data){
 			console.log(data);
 			if(data.code==1){
-				layer.msg("添加成功");
+				layer.msg("添加成功",{icon:1,time:1500},function(){
+					parent.location.href=parent.location.href;
+				});
 	
 			}else{
 				layer.msg(data.msg);

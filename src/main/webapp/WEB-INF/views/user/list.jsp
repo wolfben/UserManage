@@ -6,8 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<jsp:include page="../shared/_header.jsp"></jsp:include>
+<c:import url="../shared/_header.jsp"></c:import>
 </head>
+
 <body>
 	<div>
 		<input class="btn btn-primary btn-add" type="button" value="添加">
@@ -30,15 +31,9 @@
 		</c:forEach>
 	</table>
 	
-<nav aria-label="Page navigation">
-<ul class="pagination">
-	<c:forEach var="i" begin="1" end="${pageInfo.getPages() }">
-	<li><a href="${pageContext.request.contextPath}/user/list?page=${i }">${i }</a></li>
-	</c:forEach>
-  </ul>
-  </nav>
+	<c:import url="../shared/_pager.jsp"  ></c:import>
 	
-	<jsp:include page="../shared/_footer.jsp"></jsp:include>
+	<c:import url="../shared/_footer.jsp"></c:import>
 	<script>
 		$(function() {
 			$(".btn-search").click(function(){

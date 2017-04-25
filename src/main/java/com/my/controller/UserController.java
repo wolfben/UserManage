@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserController extends BaseController {
 
 	private static final Logger log = Logger.getLogger(UserController.class);// 日志文件
 	@Resource
@@ -72,36 +72,25 @@ public class UserController {
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> insert(User user) {
-		Map<String, Object> result = new HashMap<String, Object>();
+		
 		if (user.getName() == "") {
-			result.put("code", -1);
-			result.put("msg", "姓名不能为空");
-
-			return result;
+			return EndError("姓名不能为空");
 		}
 
 		int id = userService.insert(user);
-
-		result.put("code", 1);
-		result.put("msg", "成功");
-
-		return result;
+		
+		return EndSuccess();
 	}
 
 	@RequestMapping(value = "/delete")
 	@ResponseBody
 	public Map<String, Object> delete(int id) {
-		Map<String, Object> result = new HashMap<String, Object>();
 
 		if (userService.deleteByPrimaryKey(id) > 0) {
-			result.put("code", 1);
-			result.put("msg", "成功");
-			return result;
+			return EndSuccess();
 		}
 
-		result.put("code", -1);
-		result.put("msg", "删除失败");
-
-		return result;
+		return EndError("删除失败");
 	}
+	
 }
