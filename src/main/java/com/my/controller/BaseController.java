@@ -21,7 +21,7 @@ public class BaseController {
 	}
 	
 	public Map<String,Object> EndError(String msg){
-		return End(ECode.Error,null,msg);
+		return End(ECode.Error,msg,null);
 	}
 	
 	public Map<String,Object> End(ECode code,String msg,Object data ){

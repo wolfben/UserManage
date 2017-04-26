@@ -8,39 +8,45 @@
 <title>Insert title here</title>
 <c:import url="../shared/_header.jsp"></c:import>
 </head>
-
 <body>
-	<div>
-		<input class="btn btn-primary btn-add" type="button" value="添加">
-		
-		<input type="text" id="txt-key"/><input class="btn btn-primary btn-search" type="button" value="搜索">
-	</div>
-	<table class="table">
-		<tr>
-			<td>序号</td>
-			<td>姓名</td>
-			<td>操作</td>
-		</tr>
-		<c:forEach items="${list}" var="item">
+	<div class="page">
+	<c:import url="../shared/_menu.jsp"></c:import>
+	<div class="col-md-10">
+		<div>
+			<input type="text" id="txt-key" /><input
+				class="btn btn-primary btn-search" type="button" value="搜索">
+				&nbsp;
+				<input class="btn btn-primary btn-add" type="button" value="添加">
+		</div>
+		<table class="table">
 			<tr>
-				<td>${item.id}</td>
-				<td><a href="detail?id=${item.id }">${item.name }</a></td>
-				<td><input class="btn btn-danger btn-del" data-id="${item.id}"
-					type="button" value="删除"></td>
+				<td>序号</td>
+				<td>姓名</td>
+				<td>操作</td>
 			</tr>
-		</c:forEach>
-	</table>
-	
-	<c:import url="../shared/_pager.jsp"  ></c:import>
-	
-	<c:import url="../shared/_footer.jsp"></c:import>
+			<c:forEach items="${list}" var="item">
+				<tr>
+					<td>${item.id}</td>
+					<td><a href="detail?id=${item.id }">${item.name }</a></td>
+					<td><input class="btn btn-danger btn-del" data-id="${item.id}"
+						type="button" value="删除"></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<c:import url="../shared/_pager.jsp"></c:import>
+		<c:import url="../shared/_footer.jsp"></c:import>
+	</div>
+	</div>
 	<script>
 		$(function() {
-			$(".btn-search").click(function(){
-				var key=$("#txt-key").val();
-				location.href="${pageContext.request.contextPath}/user/list?name="+key;
-			});
-			
+			$(".btn-search")
+					.click(
+							function() {
+								var key = $("#txt-key").val();
+								location.href = "${pageContext.request.contextPath}/user/list?name="
+										+ key;
+							});
+
 			$(".btn-add").click(function() {
 				layer.open({
 					type : 2,
@@ -65,11 +71,12 @@
 					}, function(data) {
 						if (data.code == 1) {
 							layer.msg('删除成功', {
-								  icon: 1,
-								  time: 2000 //2秒关闭（如果不配置，默认是3秒）
-								}, function(){
-									location.href = location.href;
-								});
+								icon : 1,
+								time : 2000
+							//2秒关闭（如果不配置，默认是3秒）
+							}, function() {
+								location.href = location.href;
+							});
 						} else {
 							layer.msg(data.msg);
 						}

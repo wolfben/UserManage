@@ -41,7 +41,7 @@ public class UserController extends BaseController {
 			map.put("name", "%" + name + "%");
 		}
 
-		PageHelper.startPage(page, 10);
+		PageHelper.startPage(page, 8);
 		List list = userService.getList(map);
 		
 		PageInfo pageInfo = new PageInfo(list);
